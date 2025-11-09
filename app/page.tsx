@@ -1,121 +1,45 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Palette, Globe, Code2, Rocket, Cpu, Layers, Sparkles, Github, Linkedin, Mail } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-
-type Theme = "light" | "dark" | "system"
-type Language = "en" | "es" | "pt"
-
-const translations = {
-  es: {
-    title: "Componentes de Mauricio Tognoli",
-    subtitle: "Una colección curada de componentes React modernos",
-    description:
-      "Creando interfaces. Construyendo software pulido y experiencias web. Experimentando con detalles mágicos en interfaces de usuario.",
-    aboutTitle: "Sobre mí",
-    aboutText:
-      "Soy un desarrollador frontend especializado en React, Next.js y Tailwind CSS. Me apasiona el diseño funcional y las interfaces limpias. Este proyecto es una demostración de mi enfoque en la calidad visual, la accesibilidad y la consistencia en el desarrollo de interfaces.",
-    techStack: "Stack Tecnológico",
-    featuredComponents: "Componentes Destacados",
-    process: "Mi Proceso de Desarrollo",
-    ctaTitle: "¿Querés colaborar o ver más proyectos?",
-    ctaButton: "Contactame",
-  },
-  en: {
-    title: "Mauricio Tognoli Components",
-    subtitle: "A curated collection of modern React components",
-    description:
-      "Crafting interfaces. Building polished software and web experiences. Experimenting with magical details in user interfaces.",
-    aboutTitle: "About Me",
-    aboutText:
-      "I’m a frontend developer specialized in React, Next.js, and Tailwind CSS. I’m passionate about clean, functional UI design. This project demonstrates my focus on visual quality, accessibility, and interface consistency.",
-    techStack: "Tech Stack",
-    featuredComponents: "Featured Components",
-    process: "My Development Process",
-    ctaTitle: "Want to collaborate or see more projects?",
-    ctaButton: "Get in touch",
-  },
-}
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import Link from "next/link";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { siteContent } from "@/data/siteContent"; // 👈 archivo unificado
+import { useThemeLang } from "@/context/ThemeLangContext"; // si ya lo tenés definido
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<Language>("es")
-  const t = translations[language]
-
-  const technologies = ["React", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Radix UI"]
-
-  const processSteps = [
-    {
-      icon: <Sparkles className="h-6 w-6 text-primary" />,
-      title: "Diseño UI",
-      text: "Empiezo con una visión clara del diseño, manteniendo equilibrio entre estética y usabilidad.",
-    },
-    {
-      icon: <Code2 className="h-6 w-6 text-primary" />,
-      title: "Desarrollo",
-      text: "Escribo código limpio y modular usando las mejores prácticas en React y TypeScript.",
-    },
-    {
-      icon: <Cpu className="h-6 w-6 text-primary" />,
-      title: "Optimización",
-      text: "Cuido el rendimiento y la accesibilidad en cada componente, priorizando la experiencia del usuario.",
-    },
-    {
-      icon: <Rocket className="h-6 w-6 text-primary" />,
-      title: "Entrega",
-      text: "Creo experiencias que se ven y se sienten profesionales, con animaciones suaves y consistentes.",
-    },
-  ]
-
-  const featuredComponents = [
-    {
-      title: "Navbar Moderna",
-      image: "/navbar-preview.png",
-      href: "/navbars",
-      description: "Navegación adaptable con menús desplegables, íconos y cambio de tema.",
-    },
-    {
-      title: "Dashboard Card",
-      image: "/dashboard-preview.png",
-      href: "#",
-      description: "Diseños de tarjetas personalizables para dashboards y paneles de usuario.",
-    },
-    {
-      title: "Botones UI",
-      image: "/buttons-preview.png",
-      href: "#",
-      description: "Botones animados con diferentes variantes y estilos accesibles.",
-    },
-  ]
+const { language } = useThemeLang(); // 👈 idioma global del contexto
+  const t = siteContent[language];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="py-20 px-4 text-center h-screen flex flex-col justify-center">
+      <section className="py-16 px-4 text-center flex flex-col justify-center h-screen ">
         <div className="max-w-4xl mx-auto">
           <Image
             src="/logo-mt.png"
             alt="Mauricio Tognoli Logo"
-            width={180}
-            height={180}
-            className="mx-auto mb-6"
+            width={150}
+            height={150}
+            className="mx-auto mb-6 w-32 sm:w-40 md:w-48"
           />
-         <h2 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
-              <span className="text-shadow-lg text-foreground">Mauricio</span>
-              <span className="text-shadow-lg text-orange-400">Tognoli</span>
-              <span className="text-foreground"> components.</span>
-            </h2>
-          <p className="text-xl text-muted-foreground mb-8">{t.description}</p>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-6">
+            Mauricio<span className="text-primary">Tognoli</span> components
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 px-2">
+            {t.description}
+          </p>
 
-          {/* Tech Stack Badges */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {technologies.map((tech) => (
-              <Badge key={tech} variant="secondary" className="px-3 py-1">
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {t.technologies.map((tech) => (
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="px-3 py-1 text-sm"
+              >
                 {tech}
               </Badge>
             ))}
@@ -124,108 +48,132 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-4 bg-orange-400/40 dark:bg-gray-800 h-screen flex items-center">
-  <div className="container mx-auto max-w-4xl text-center">
-    <h2 className="text-3xl font-bold mb-6">{t.aboutTitle}</h2>
-    <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-      {t.aboutText}
-    </p>
+      <section className="py-16 px-4 bg-neutral-100 dark:bg-neutral-800 flex items-center min-h-[80vh]">
+        <div className="container mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+            {t.aboutTitle}
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-10">
+            {t.aboutText}
+          </p>
 
-    {/* Botones de acción */}
-    <div className="flex justify-center gap-4">
-      <Link
-        href="mailto:mauriciotognoli@gmail.com"
-        className="inline-flex items-center px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-md hover:shadow-lg"
-      >
-        Contacto
-      </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link
+              href="mailto:tognolimauricio@gmail.com"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/80 transition-all shadow-md hover:shadow-lg w-full sm:w-auto"
+            >
+              {language === "es" ? "Contacto" : "Contact"}
+            </Link>
 
-      <Link
-        href="https://mauriciotognoli.vercel.app"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center px-6 py-3 rounded-xl border border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-all shadow-md hover:shadow-lg"
-      >
-        Ver Portfolio
-      </Link>
-    </div>
-  </div>
-</section>
-
-
-      {/* Featured Components */}
-      <section className="py-20 px-4 h-screen flex items-center">
-        <div className="container mx-auto">
-          <h3 className="text-3xl font-semibold mb-10 text-center">{t.featuredComponents}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredComponents.map((component, index) => (
-              <Card
-                key={index}
-                className="p-4 bg-card/50 backdrop-blur hover:scale-[1.02] transition-all"
-              >
-                <a href={component.href}>
-                  <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
-                    <Image
-                      src={component.image}
-                      alt={component.title}
-                      fill
-                      className="object-cover opacity-90 hover:opacity-100 transition-opacity"
-                    />
-                  </div>
-                  <h4 className="font-semibold text-lg">{component.title}</h4>
-                  <p className="text-sm text-muted-foreground">{component.description}</p>
-                </a>
-              </Card>
-            ))}
+            <Link
+              href="https://portfolio-mauriciotognoli.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-all shadow-md hover:shadow-lg w-full sm:w-auto"
+            >
+              {language === "es" ? "Ver Portfolio" : "View Portfolio"}
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20 px-4 bg-orange-400/40 dark:bg-gray-800 h-screen flex items-center">
+      {/* Featured Components */}
+      <section className="py-16 px-4 flex items-center min-h-[80vh]">
         <div className="container mx-auto">
-          <h3 className="text-3xl font-semibold mb-12 text-center">{t.process}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <Card key={index} className="p-6 text-center bg-card/50 backdrop-blur">
-                <div className="flex justify-center mb-4">{step.icon}</div>
-                <h4 className="font-semibold mb-2">{step.title}</h4>
-                <p className="text-sm text-muted-foreground">{step.text}</p>
-              </Card>
-            ))}
+          <h3 className="text-2xl sm:text-3xl font-semibold mb-10 text-center">
+            {t.featuredComponentsTitle}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  {t.featuredComponents.map((component, index) => {
+    const isComingSoon = component.href === "#"; // 🔹 Detectamos si el componente no está disponible
+    return (
+      <Card
+        key={index}
+        className="relative p-4 bg-card/50 backdrop-blur hover:scale-[1.02] transition-all overflow-hidden"
+      >
+        <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
+          <Image
+            src={component.image}
+            alt={component.title}
+            fill
+            className={`object-cover transition-opacity duration-300 ${
+              isComingSoon ? "opacity-60 blur-sm" : "opacity-90 hover:opacity-100"
+            }`}
+          />
+
+          {isComingSoon && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+              <span className="text-primary text-sm sm:text-base font-medium">
+                {language === "es" ? "Próximamente" : "Coming Soon"}
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className={isComingSoon ? "cursor-not-allowed opacity-70" : ""}>
+          {isComingSoon ? (
+            <>
+              <h4 className="font-semibold text-lg">{component.title}</h4>
+              <p className="text-sm text-muted-foreground">
+                {component.description}
+              </p>
+            </>
+          ) : (
+            <Link href={component.href}>
+              <h4 className="font-semibold text-lg">{component.title}</h4>
+              <p className="text-sm text-muted-foreground">
+                {component.description}
+              </p>
+            </Link>
+          )}
+        </div>
+      </Card>
+    );
+  })}
+</div>
+
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-16 px-4 bg-neutral-100 dark:bg-neutral-800 flex items-center min-h-[80vh]">
+        <div className="container mx-auto">
+          <h3 className="text-2xl sm:text-3xl font-semibold mb-12 text-center">
+            {t.processTitle}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {t.processSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <Card
+                  key={index}
+                  className="p-6 text-center bg-card/50 backdrop-blur"
+                >
+                  <div className="flex justify-center mb-4">
+                    <Icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h4 className="font-semibold mb-2">{step.title}</h4>
+                  <p className="text-sm text-muted-foreground">{step.text}</p>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 text-center">
+      <section className="py-16 px-4 text-center">
         <div className="max-w-2xl mx-auto">
-          <h3 className="text-3xl font-bold mb-6">{t.ctaTitle}</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold mb-6">{t.ctaTitle}</h3>
+          <Link href="mailto:tognolimauricio@gmail.com">
           <Button size="lg" className="rounded-xl">
             {t.ctaButton}
           </Button>
+          </Link>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border/40 py-10 px-4">
-        <div className="container mx-auto text-center">
-          <p className="text-muted-foreground mb-4">
-            © 2025 Mauricio Tognoli — Todos los derechos reservados.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Link href="https://github.com/" target="_blank">
-              <Github className="h-5 w-5 hover:text-primary transition-colors" />
-            </Link>
-            <Link href="https://linkedin.com/" target="_blank">
-              <Linkedin className="h-5 w-5 hover:text-primary transition-colors" />
-            </Link>
-            <Link href="mailto:mauriciotognoli@gmail.com">
-              <Mail className="h-5 w-5 hover:text-primary transition-colors" />
-            </Link>
-          </div>
-        </div>
-      </footer>
+     
     </div>
-  )
+  );
 }

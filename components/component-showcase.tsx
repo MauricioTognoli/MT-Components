@@ -1,74 +1,128 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { Monitor, Laptop, Tablet, Smartphone } from "lucide-react"
+import { useState, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import {
+  Monitor,
+  Laptop,
+  Tablet,
+  Smartphone,
+  Github,
+  Lock,
+  Mail,
+} from "lucide-react";
+import Link from "next/link";
+import { useThemeLang } from "@/context/ThemeLangContext";
+
+// 🗣️ Traducciones
+const translations = {
+  es: {
+    preview: "Vista previa",
+    code: "Código",
+    lockedView: "Vista móvil bloqueada",
+    seeCodeTitle: "¿Querés ver el código de este componente?",
+    seeCodeText:
+      "Explorá el repositorio completo en GitHub para ver cómo está construido este componente y aprender más sobre su estructura.",
+    seeOnGithub: "Ver en GitHub",
+    email: "tognolimauricio@gmail.com",
+  },
+  en: {
+    preview: "Preview",
+    code: "Code",
+    lockedView: "Mobile view locked",
+    seeCodeTitle: "Want to see this component’s code?",
+    seeCodeText:
+      "Check out the full repository on GitHub to see how this component is built and learn more about its structure.",
+    seeOnGithub: "View on GitHub",
+    email: "tognolimauricio@gmail.com",
+  },
+};
 
 interface ComponentShowcaseProps {
-  viewportSize: string
-  theme: "light" | "dark" | "system"
-  children?: React.ReactNode
-  url?: string
-  title?: string
-  code?: string // 👈 opcional, por si querés pasar el código manualmente
+  viewportSize?: string;
+  title?: string;
+  githubUrl?: string;
+  children: React.ReactNode;
 }
 
 export function ComponentShowcase({
-  viewportSize,
-  theme,
-  children,
-  url = "mauriciotognoli.dev/components",
+  viewportSize = "100%",
   title,
-  code,
+  githubUrl = "https://github.com/mauriciotognoli/components",
+  children,
 }: ComponentShowcaseProps) {
-  const [currentViewport, setCurrentViewport] = useState(viewportSize || "100%")
-  const [showCode, setShowCode] = useState(false)
+  const [currentViewport, setCurrentViewport] = useState(viewportSize);
+  const [showCode, setShowCode] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 🌐 Idioma global desde el contexto
+  const { language } = useThemeLang();
+  const t = translations[language];
 
   const viewports = [
     { label: "Full", value: "100%", icon: <Monitor size={16} /> },
     { label: "Laptop", value: "1024px", icon: <Laptop size={16} /> },
     { label: "Tablet", value: "768px", icon: <Tablet size={16} /> },
     { label: "Mobile", value: "375px", icon: <Smartphone size={16} /> },
-  ]
+  ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 640;
+      setIsMobile(mobile);
+      if (mobile) setCurrentViewport("375px");
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="space-y-8">
-      {/* Title */}
       {title && (
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold text-foreground tracking-tight">{title}</h2>
-          <div className="h-1 w-16 mx-auto bg-orange-400 rounded-full" />
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">
+            {title}
+          </h2>
+          <div className="h-1 w-16 mx-auto bg-primary rounded-full" />
         </div>
       )}
 
-      {/* Showcase Card */}
-      <Card className="p-1 bg-muted/30 mb-10">
-        <div className="bg-background rounded-lg overflow-hidden relative">
-          {/* Header */}
-          <div className="flex items-center gap-2 px-4 py-3 bg-muted/50 border-b relative">
-            <div className="flex gap-1.5">
-              <div className="h-3 w-3 rounded-full bg-red-500/60"></div>
-              <div className="h-3 w-3 rounded-full bg-yellow-500/60"></div>
-              <div className="h-3 w-3 rounded-full bg-green-500/60"></div>
-            </div>
+      <Card className="p-1 mb-10 relative overflow-hidden border border-border shadow-inner rounded-xl">
+        {/* Header consola */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-gradient-to-b from-background/90 to-muted relative">
+          {/* Botones estilo macOS */}
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-red-500/70"></span>
+            <span className="h-3 w-3 rounded-full bg-yellow-500/70"></span>
+            <span className="h-3 w-3 rounded-full bg-green-500/70"></span>
+          </div>
 
-            <div className="flex-1 text-center">
-              <div className="text-xs text-muted-foreground bg-background rounded px-3 py-1 inline-block">
-                {url}
-              </div>
-            </div>
+          {/* Email */}
+          <Link
+            href={`mailto:${t.email}`}
+            className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2 text-sm font-medium text-muted-foreground bg-muted/70 px-4 py-1.5 rounded-full border border-border shadow-sm hover:bg-primary/10 hover:text-primary dark:hover:text-primary transition-colors"
+          >
+            <Mail size={18} />
+            <span className="tracking-tight">{t.email}</span>
+          </Link>
 
-            {/* Desktop Controls */}
-            <div className="hidden sm:flex items-center gap-3 absolute right-3 top-2 bottom-2 my-auto">
-              <div className="flex items-center gap-1">
+          {/* Controles */}
+          <div className="flex items-center gap-3">
+            {/* Controles de viewport */}
+            {!isMobile ? (
+              <div className="hidden sm:flex items-center gap-1">
                 {viewports.map((vp) => (
                   <Button
                     key={vp.value}
                     size="icon"
-                    variant={currentViewport === vp.value ? "default" : "ghost"}
+                    variant={
+                      currentViewport === vp.value ? "default" : "ghost"
+                    }
                     onClick={() => setCurrentViewport(vp.value)}
                     className="h-8 w-8"
                     title={vp.label}
@@ -77,73 +131,65 @@ export function ComponentShowcase({
                   </Button>
                 ))}
               </div>
-
-              <div className="flex items-center gap-2">
-                <Label htmlFor="code-switch" className="text-xs font-medium">
-                  Preview
-                </Label>
-                <Switch id="code-switch" checked={showCode} onCheckedChange={setShowCode} />
-                <Label htmlFor="code-switch" className="text-xs font-medium">
-                  Code
-                </Label>
+            ) : (
+              <div className="flex items-center w-min gap-2 text-xs text-muted-foreground">
+                <Lock size={25} className="text-primary" />
+                <span>{t.lockedView}</span>
               </div>
-            </div>
+            )}
 
-            {/* Mobile Switch */}
-            <div className="flex sm:hidden items-center gap-2 absolute right-3 top-2 bottom-2 my-auto">
-              <Label htmlFor="code-switch-mobile" className="text-xs font-medium">
-                Code
+            {/* Switch Code/Preview */}
+            <div className="flex items-center gap-2">
+              <Label htmlFor="code-switch" className="text-xs font-medium">
+                {t.preview}
               </Label>
               <Switch
-                id="code-switch-mobile"
+                id="code-switch"
                 checked={showCode}
                 onCheckedChange={setShowCode}
               />
+              <Label htmlFor="code-switch" className="text-xs font-medium">
+                {t.code}
+              </Label>
             </div>
           </div>
+        </div>
 
-          {/* Content */}
-          {!showCode ? (
-            <div className="p-8 min-h-[400px] flex items-center justify-center relative">
-              {/* En mobile solo se muestra versión Mobile */}
-              <div
-  className="transition-all duration-300 ease-in-out border rounded-lg overflow-hidden"
-  style={{
-    width: "100%",
-    maxWidth: currentViewport, // 👈 acá usamos el estado dinámico
-  }}
->
-  {children}
-</div>
+        {/* Contenido principal */}
+        <div className="relative flex items-center justify-center p-6 sm:p-8 min-h-[400px] bg-background overflow-hidden rounded-b-lg">
+          <div
+            className={`transition-all duration-500 ease-in-out border border-border rounded-lg overflow-hidden flex justify-center bg-card shadow-inner ${
+              showCode ? "blur-sm pointer-events-none" : ""
+            }`}
+            style={{
+              width: "100%",
+              maxWidth: isMobile ? "375px" : currentViewport,
+              transition: "max-width 0.4s ease-in-out",
+            }}
+          >
+            <div className="w-full">{children}</div>
+          </div>
 
-            </div>
-          ) : (
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-semibold">Usage Example</h4>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() =>
-                    window.open("https://github.com/mauriciotognoli/components", "_blank")
-                  }
-                >
-                  View on GitHub
-                </Button>
-              </div>
-
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
-                <code>
-                  {code ??
-                    `<ComponentShowcase viewportSize="100%" theme="light" title="${title}">
-  ${children ? "<YourComponent />" : ""}
-</ComponentShowcase>`}
-                </code>
-              </pre>
+          {/* Overlay del código */}
+          {showCode && (
+            <div className="absolute inset-0 backdrop-blur-md bg-background/80 flex flex-col items-center justify-center text-center p-6 animate-fadeIn">
+              <h3 className="text-lg font-semibold mb-3">
+                {t.seeCodeTitle}
+              </h3>
+              <p className="text-sm text-muted-foreground mb-5 max-w-sm">
+                {t.seeCodeText}
+              </p>
+              <Button
+                onClick={() => window.open(githubUrl, "_blank")}
+                className="flex items-center gap-2 bg-primary hover:bg-primary/80"
+              >
+                <Github size={18} />
+                {t.seeOnGithub}
+              </Button>
             </div>
           )}
         </div>
       </Card>
     </div>
-  )
+  );
 }

@@ -2,8 +2,11 @@ import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
+import '@/styles/globals.css'
 import { Navbar } from '@/components/Navbar'
+import { ThemeLangProvider } from '@/context/ThemeLangContext'
+import { Providers } from '@/context/Providers'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'v0 App',
@@ -17,12 +20,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Navbar/>
-        {children}
-        <Analytics />
+    <html lang="es" suppressHydrationWarning>
+      <body>
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer/>
+          <Analytics />
+          </Providers>
       </body>
     </html>
-  )
+  );
 }

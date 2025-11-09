@@ -1,41 +1,54 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ComponentShowcase } from "@/components/component-showcase"
-import { ExampleNavbars } from "@/components/Navbars/exampleNavbars"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import { useThemeLang } from "@/context/ThemeLangContext";
+import { ComponentShowcase } from "@/components/component-showcase";
+import { ExampleNavbars } from "@/components/Navbars/exampleNavbars";
+import { navbarsData } from "@/data/navbarsData";
 
 export default function NavbarsPage() {
-  const [viewportSize, setViewportSize] = useState("100%")
-  const [theme, setTheme] = useState<"light" | "dark" | "system">("dark")
-  const [selectedNavbar, setSelectedNavbar] = useState("navbar1")
+  const { language } = useThemeLang();
+  const t = navbarsData[language]; // 👈 textos según idioma
+
+  const [viewportSize, setViewportSize] = useState("100%");
+  const [theme, setTheme] = useState<"light" | "dark" | "system">("dark");
+  const [selectedNavbar, setSelectedNavbar] = useState("navbar2");
 
   const navbars = [
-    { id: "navbar1", name: "Simple Navbar", category: "Basic" },
-    { id: "navbar2", name: "Centered Navbar", category: "Layout" },
-    { id: "navbar3", name: "Navbar with Search", category: "Feature" },
-  ]
+    { id: "navbar1", name: t.navbar1, category: t.categories.basic },
+    { id: "navbar2", name: t.navbar2, category: t.categories.layout },
+    { id: "navbar3", name: t.navbar3, category: t.categories.feature },
+  ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground ">
-      <div className="container mx-auto space-y-10">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <div className="container mx-auto px-4 py-10 flex-1 flex flex-col gap-10">
         {/* Header */}
-        <div className="text-center  h-screen flex flex-col justify-center">
-          <h1 className="text-8xl font-bold">Navbars</h1>
-          <div className="h-2 w-60 mx-auto bg-orange-400 rounded-full mb-6 mt-3" />
-          <p className="text-muted-foreground text-2xl max-w-2xl mx-auto">
-            Explore different navbar styles built with React, Tailwind CSS, and shadcn/ui.
+        <header className="h-screen min-h-screen text-center flex flex-col justify-center items-center flex-1 space-y-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold">
+            {t.title}
+          </h1>
+          <div className="h-1 sm:h-2 w-32 sm:w-40 md:w-48 mx-auto bg-primary rounded-full" />
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-lg sm:max-w-xl md:max-w-2xl mx-auto">
+            {t.description}
           </p>
-        </div>
+        </header>
 
-     
+        {/* Component Showcase Section */}
+        <section className="space-y-10 pb-20">
+          <div className="w-full">
+            <ComponentShowcase  title={t.showcase1} githubUrl="https://github.com/mauriciotognoli/components/tree/main/navbar-with-searchbar">
+              <ExampleNavbars selectedNavbar={selectedNavbar} />
+            </ComponentShowcase>
+          </div>
 
-        {/* Component Showcase */}
-        <ComponentShowcase viewportSize={viewportSize} title='Navbar 1'>
-          <ExampleNavbars selectedNavbar={selectedNavbar} />
-        </ComponentShowcase>
+          <div className="w-full">
+            <ComponentShowcase  title={t.showcase2}>
+              <ExampleNavbars selectedNavbar={selectedNavbar} />
+            </ComponentShowcase>
+          </div>
+        </section>
       </div>
     </div>
-  )
+  );
 }
