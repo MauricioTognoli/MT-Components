@@ -38,14 +38,14 @@ export default function AboutPage() {
               <Mail className="mr-2 h-5 w-5" /> {language === "es" ? "Contacto" : "Contact"}
             </Link>
             <Link
-              href="https://github.com/mauriciotognoli"
+              href="https://github.com/MauricioTognoli"
               target="_blank"
               className="inline-flex items-center px-5 py-3 border border-primary rounded-xl font-semibold hover:bg-primary hover:text-primary-foreground transition-all shadow-md"
             >
               <Github className="mr-2 h-5 w-5" /> Github
             </Link>
             <Link
-              href="https://www.linkedin.com/in/mauriciotognoli/"
+              href="https://www.linkedin.com/in/mauricio-tognoli"
               target="_blank"
               className="inline-flex items-center px-5 py-3 border border-primary rounded-xl font-semibold hover:bg-primary hover:text-primary-foreground transition-all shadow-md"
             >
@@ -70,7 +70,7 @@ export default function AboutPage() {
           {language === "es" ? "Habilidades" : "Skills"}
         </h2>
         <div className="flex flex-wrap justify-center gap-4">
-          {["React", "Next.js", "Tailwind CSS", "JavaScript", "TypeScript", "GraphQL"].map(
+          {["React", "Next.js", "Tailwind CSS", "JavaScript", "TypeScript"].map(
             (skill) => (
               <span
                 key={skill}

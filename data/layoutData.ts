@@ -62,7 +62,11 @@ export const layoutData: LayoutData = {
     },
   },
   socialLinks: [
-    { name: "GitHub", url: "https://github.com/mauriciotognoli", icon: "github" },
+    {
+      name: "GitHub",
+      url: "https://github.com/MauricioTognoli",
+      icon: "github",
+    },
     {
       name: "LinkedIn",
       url: "https://www.linkedin.com/in/mauricio-tognoli",

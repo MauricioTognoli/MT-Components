@@ -20,7 +20,7 @@ export default function Footer() {
         {/* Iconos sociales */}
         <div className="flex items-center justify-center gap-6">
           <Link
-            href="https://github.com/"
+            href="https://github.com/MauricioTognoli"
             target="_blank"
             aria-label="GitHub"
             className="text-muted-foreground hover:text-primary transition-colors"
@@ -29,7 +29,7 @@ export default function Footer() {
           </Link>
 
           <Link
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/mauricio-tognoli"
             target="_blank"
             aria-label="LinkedIn"
             className="text-muted-foreground hover:text-primary transition-colors"
@@ -38,7 +38,7 @@ export default function Footer() {
           </Link>
 
           <Link
-            href="mailto:mauriciotognoli@gmail.com"
+            href="mailto:tognolimauricio@gmail.com"
             aria-label="Email"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
