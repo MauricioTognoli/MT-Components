@@ -1,22 +1,19 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import '@/styles/globals.css'
 import { Navbar } from '@/components/Navbar'
-import { ThemeLangProvider } from '@/context/ThemeLangContext'
 import { Providers } from '@/context/Providers'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Mauricio Tognoli Components',
   description: 'Portafolio de componentes y proyectos de Mauricio Tognoli.',
-  generator: 'v0.app',
+  generator: 'Mauricio Tognoli',
   applicationName: 'Mauricio Tognoli Components',
   keywords: ['frontend', 'React', 'Next.js', 'Tailwind CSS', 'portafolio', 'componentes'],
   authors: [{ name: 'Mauricio Tognoli', url: 'https://portfolio-mauriciotognoli.vercel.app' }],
-  colorScheme: 'dark light',
-  viewport: 'width=device-width, initial-scale=1.0',
   openGraph: {
     title: 'Mauricio Tognoli Components',
     description: 'Portafolio de componentes y proyectos de Mauricio Tognoli.',
@@ -43,6 +40,12 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  colorScheme: 'dark light',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,7 +57,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
-          <Footer/>
+          <Footer />
           <Analytics />
         </Providers>
       </body>

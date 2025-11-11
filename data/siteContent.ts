@@ -52,14 +52,14 @@ export const siteContent: Record<string, SiteContent> = {
       },
       {
         title: "Dashboard Card",
-        image: "/dashboard-preview.png",
+        image: "/navbar-preview.png",
         href: "#",
         description:
           "Diseños de tarjetas personalizables para dashboards y paneles de usuario.",
       },
       {
         title: "Botones UI",
-        image: "/buttons-preview.png",
+        image: "/navbar-preview.png",
         href: "#",
         description:
           "Botones animados con diferentes variantes y estilos accesibles.",
