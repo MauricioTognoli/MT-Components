@@ -48,16 +48,12 @@ export const layoutData: LayoutData = {
       label: "Componentes",
       items: [
         { label: "Navbar", href: "/navbars" },
-        { label: "Tarjetas", href: "/cards" },
-        { label: "Botones", href: "/buttons" },
       ],
     },
     en: {
       label: "Components",
       items: [
         { label: "Navbar", href: "/navbars" },
-        { label: "Cards", href: "/cards" },
-        { label: "Buttons", href: "/buttons" },
       ],
     },
   },

@@ -6,12 +6,12 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
-import { siteContent } from "@/data/siteContent"; // 👈 archivo unificado
-import { useThemeLang } from "@/context/ThemeLangContext"; // si ya lo tenés definido
+import { Github, Linkedin, Mail, MailIcon } from "lucide-react";
+import { siteContent } from "@/data/siteContent";
+import { useThemeLang } from "@/context/ThemeLangContext";
 
 export default function HomePage() {
-const { language } = useThemeLang(); // 👈 idioma global del contexto
+  const { language } = useThemeLang();
   const t = siteContent[language];
 
   return (
@@ -26,7 +26,7 @@ const { language } = useThemeLang(); // 👈 idioma global del contexto
             height={150}
             className="mx-auto mb-6 w-32 sm:w-40 md:w-48"
           />
-          <h2 className="text-3xl sm:text-5xl font-bold mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
             Mauricio<span className="text-primary">Tognoli</span> components
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground mb-8 px-2">
@@ -43,6 +43,65 @@ const { language } = useThemeLang(); // 👈 idioma global del contexto
                 {tech}
               </Badge>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Components */}
+      <section className="py-16 px-4 flex items-center min-h-[80vh]">
+        <div className="container mx-auto">
+          <h3 className="text-2xl sm:text-3xl font-semibold mb-10 text-center">
+            {t.featuredComponentsTitle}
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {t.featuredComponents.map((component, index) => {
+              const isComingSoon = component.href === "#";
+
+              const CardContent = (
+                <Card
+                  key={index}
+                  className={`relative p-4 bg-card/50 backdrop-blur hover:scale-[1.02] transition-all overflow-hidden ${
+                    isComingSoon
+                      ? "cursor-not-allowed opacity-70"
+                      : "cursor-pointer"
+                  }`}
+                >
+                  <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
+                    <Image
+                      src={component.image}
+                      alt={component.title}
+                      fill
+                      className={`object-cover transition-opacity duration-300 ${
+                        isComingSoon
+                          ? "opacity-60 blur-sm"
+                          : "opacity-90 hover:opacity-100"
+                      }`}
+                    />
+                    {isComingSoon && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                        <span className="text-primary text-sm sm:text-base font-medium">
+                          {language === "es" ? "Próximamente" : "Coming Soon"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <h4 className="font-semibold text-lg">{component.title}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {component.description}
+                  </p>
+                </Card>
+              );
+
+              return isComingSoon ? (
+                <div key={index}>{CardContent}</div>
+              ) : (
+                <Link key={index} href={component.href} className="block">
+                  {CardContent}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -77,64 +136,6 @@ const { language } = useThemeLang(); // 👈 idioma global del contexto
         </div>
       </section>
 
-      {/* Featured Components */}
-      <section className="py-16 px-4 flex items-center min-h-[80vh]">
-        <div className="container mx-auto">
-          <h3 className="text-2xl sm:text-3xl font-semibold mb-10 text-center">
-            {t.featuredComponentsTitle}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-  {t.featuredComponents.map((component, index) => {
-    const isComingSoon = component.href === "#"; // 🔹 Detectamos si el componente no está disponible
-    return (
-      <Card
-        key={index}
-        className="relative p-4 bg-card/50 backdrop-blur hover:scale-[1.02] transition-all overflow-hidden"
-      >
-        <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
-          <Image
-            src={component.image}
-            alt={component.title}
-            fill
-            className={`object-cover transition-opacity duration-300 ${
-              isComingSoon ? "opacity-60 blur-sm" : "opacity-90 hover:opacity-100"
-            }`}
-          />
-
-          {isComingSoon && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-              <span className="text-primary text-sm sm:text-base font-medium">
-                {language === "es" ? "Próximamente" : "Coming Soon"}
-              </span>
-            </div>
-          )}
-        </div>
-
-        <div className={isComingSoon ? "cursor-not-allowed opacity-70" : ""}>
-          {isComingSoon ? (
-            <>
-              <h4 className="font-semibold text-lg">{component.title}</h4>
-              <p className="text-sm text-muted-foreground">
-                {component.description}
-              </p>
-            </>
-          ) : (
-            <Link href={component.href}>
-              <h4 className="font-semibold text-lg">{component.title}</h4>
-              <p className="text-sm text-muted-foreground">
-                {component.description}
-              </p>
-            </Link>
-          )}
-        </div>
-      </Card>
-    );
-  })}
-</div>
-
-        </div>
-      </section>
-
       {/* Process Section */}
       <section className="py-16 px-4 bg-neutral-100 dark:bg-neutral-800 flex items-center min-h-[80vh]">
         <div className="container mx-auto">
@@ -166,14 +167,13 @@ const { language } = useThemeLang(); // 👈 idioma global del contexto
         <div className="max-w-2xl mx-auto">
           <h3 className="text-2xl sm:text-3xl font-bold mb-6">{t.ctaTitle}</h3>
           <Link href="mailto:tognolimauricio@gmail.com">
-          <Button size="lg" className="rounded-xl">
-            {t.ctaButton}
-          </Button>
+            <Button size="lg" className="rounded-xl">
+              <MailIcon className="mr-2" />
+              {t.ctaButton}
+            </Button>
           </Link>
         </div>
       </section>
-
-     
     </div>
   );
 }

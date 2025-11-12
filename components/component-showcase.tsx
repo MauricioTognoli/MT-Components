@@ -17,7 +17,6 @@ import {
 import Link from "next/link";
 import { useThemeLang } from "@/context/ThemeLangContext";
 
-// 🗣️ Traducciones
 const translations = {
   es: {
     preview: "Vista previa",
@@ -58,7 +57,6 @@ export function ComponentShowcase({
   const [showCode, setShowCode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // 🌐 Idioma global desde el contexto
   const { language } = useThemeLang();
   const t = translations[language];
 
@@ -120,9 +118,7 @@ export function ComponentShowcase({
                   <Button
                     key={vp.value}
                     size="icon"
-                    variant={
-                      currentViewport === vp.value ? "default" : "ghost"
-                    }
+                    variant={currentViewport === vp.value ? "default" : "ghost"}
                     onClick={() => setCurrentViewport(vp.value)}
                     className="h-8 w-8"
                     title={vp.label}
@@ -173,9 +169,7 @@ export function ComponentShowcase({
           {/* Overlay del código */}
           {showCode && (
             <div className="absolute inset-0 backdrop-blur-md bg-background/80 flex flex-col items-center justify-center text-center p-6 animate-fadeIn">
-              <h3 className="text-lg font-semibold mb-3">
-                {t.seeCodeTitle}
-              </h3>
+              <h3 className="text-lg font-semibold mb-3">{t.seeCodeTitle}</h3>
               <p className="text-sm text-muted-foreground mb-5 max-w-sm">
                 {t.seeCodeText}
               </p>

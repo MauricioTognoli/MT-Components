@@ -126,7 +126,11 @@ export const Navbar = () => {
             className="p-2 hover:text-primary bg-transparent"
             onClick={toggleTheme}
           >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
           </Button>
 
           <Button
@@ -134,7 +138,9 @@ export const Navbar = () => {
             size="sm"
             className="p-2 hover:text-primary bg-transparent"
             onClick={toggleLanguage}
-            title={language === "es" ? "Switch to English" : "Cambiar a Español"}
+            title={
+              language === "es" ? "Switch to English" : "Cambiar a Español"
+            }
           >
             <Languages className="h-4 w-4" />
             <span className="ml-1 text-xs">{language.toUpperCase()}</span>
@@ -232,7 +238,11 @@ export const Navbar = () => {
               className="p-2 flex-1"
               onClick={toggleTheme}
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
             </Button>
             <Button
               variant="outline"

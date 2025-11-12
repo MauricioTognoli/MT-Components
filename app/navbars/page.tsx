@@ -8,17 +8,12 @@ import { navbarsData } from "@/data/navbarsData";
 
 export default function NavbarsPage() {
   const { language } = useThemeLang();
-  const t = navbarsData[language]; // 👈 textos según idioma
+  const t = navbarsData[language];
 
   const [viewportSize, setViewportSize] = useState("100%");
   const [theme, setTheme] = useState<"light" | "dark" | "system">("dark");
   const [selectedNavbar, setSelectedNavbar] = useState("navbar2");
 
-  const navbars = [
-    { id: "navbar1", name: t.navbar1, category: t.categories.basic },
-    { id: "navbar2", name: t.navbar2, category: t.categories.layout },
-    { id: "navbar3", name: t.navbar3, category: t.categories.feature },
-  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">

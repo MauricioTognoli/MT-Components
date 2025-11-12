@@ -35,7 +35,7 @@ export const siteContent: Record<string, SiteContent> = {
     title: "Componentes de Mauricio Tognoli",
     subtitle: "Una colección curada de componentes React modernos",
     description:
-      "Creando interfaces. Construyendo software pulido y experiencias web. Experimentando con detalles mágicos en interfaces de usuario.",
+      "Componentes diseñados para crear interfaces pulidas y experiencias web fluidas. Cada detalle busca aportar ese toque mágico que transforma el diseño en interacción.",
     aboutTitle: "Sobre mí",
     aboutText:
   "Soy un desarrollador frontend enfocado en crear experiencias digitales atractivas y eficientes. Me especializo en React, Next.js y Tailwind CSS, combinando diseño funcional con código limpio. Disfruto transformar ideas en interfaces intuitivas que conectan con los usuarios y reflejan atención al detalle."
@@ -88,15 +88,15 @@ export const siteContent: Record<string, SiteContent> = {
         text: "Creo experiencias que se ven y se sienten profesionales, con animaciones suaves y consistentes.",
       },
     ],
-    ctaTitle: "¿Querés colaborar o ver más proyectos?",
-    ctaButton: "Contactame",
+    ctaTitle: "¿Querés colaborar?",
+    ctaButton: "Construyamos algo juntos",
     technologies: [
       "React",
       "Next.js",
       "Tailwind CSS",
       "TypeScript",
       "Framer Motion",
-      "Radix UI",
+      "Figma",
     ],
   },
 
@@ -104,7 +104,7 @@ export const siteContent: Record<string, SiteContent> = {
     title: "Mauricio Tognoli Components",
     subtitle: "A curated collection of modern React components",
     description:
-      "Crafting interfaces. Building polished software and web experiences. Experimenting with magical UI details.",
+      "Components crafted to build polished interfaces and seamless web experiences. Every detail adds a touch of magic that turns design into interaction.",
     aboutTitle: "About Me",
     aboutText:
       "I’m a frontend developer specialized in React, Next.js, and Tailwind CSS. I’m passionate about clean, functional UI design.",
@@ -120,14 +120,14 @@ export const siteContent: Record<string, SiteContent> = {
       },
       {
         title: "Dashboard Card",
-        image: "/dashboard-preview.png",
+        image: "/navbar-preview.png",
         href: "#",
         description:
           "Customizable card layouts for dashboards and user panels.",
       },
       {
         title: "UI Buttons",
-        image: "/buttons-preview.png",
+        image: "/navbar-preview.png",
         href: "#",
         description:
           "Animated buttons with accessible, elegant variants and styles.",
@@ -156,15 +156,15 @@ export const siteContent: Record<string, SiteContent> = {
         text: "I create professional, smooth, and consistent experiences with elegant animations.",
       },
     ],
-    ctaTitle: "Want to collaborate or see more projects?",
-    ctaButton: "Get in touch",
+    ctaTitle: "Want to collaborate?",
+    ctaButton: "Let's build something together",
     technologies: [
       "React",
       "Next.js",
       "Tailwind CSS",
       "TypeScript",
       "Framer Motion",
-      "Radix UI",
+      "Figma",
     ],
   },
 };

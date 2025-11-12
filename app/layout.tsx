@@ -1,66 +1,85 @@
-import type { Metadata, Viewport } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import { Analytics } from '@vercel/analytics/next'
-import '@/styles/globals.css'
-import { Navbar } from '@/components/Navbar'
-import { Providers } from '@/context/Providers'
-import Footer from '@/components/Footer'
+import type { Metadata, Viewport } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import "@/styles/globals.css";
+import { Navbar } from "@/components/Navbar";
+import { Providers } from "@/context/Providers";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: 'Mauricio Tognoli Components',
-  description: 'Portafolio de componentes y proyectos de Mauricio Tognoli.',
-  generator: 'Mauricio Tognoli',
-  applicationName: 'Mauricio Tognoli Components',
-  keywords: ['frontend', 'React', 'Next.js', 'Tailwind CSS', 'portafolio', 'componentes'],
-  authors: [{ name: 'Mauricio Tognoli', url: 'https://portfolio-mauriciotognoli.vercel.app' }],
+  title: "MT Components | React + Tailwind UI Library",
+  description:
+    "Colección de componentes y experiencias UI creados por Mauricio Tognoli con React y Tailwind CSS. Diseñados para interfaces modernas, accesibles y escalables.",
+  keywords: [
+    "React components",
+    "Tailwind CSS",
+    "UI Library",
+    "Mauricio Tognoli",
+    "Next.js",
+    "Frontend",
+    "UI/UX",
+  ],
+  authors: [
+    { name: "Mauricio Tognoli", url: "https://mt-components.vercel.app" },
+  ],
+  creator: "Mauricio Tognoli",
+  publisher: "Mauricio Tognoli",
+  applicationName: "MT Components",
   openGraph: {
-    title: 'Mauricio Tognoli Components',
-    description: 'Portafolio de componentes y proyectos de Mauricio Tognoli.',
-    url: 'https://mt-components.vercel.app/',
-    siteName: 'Mauricio Tognoli Components',
+    title: "MT Components | React + Tailwind UI Library",
+    description:
+      "Componentes reutilizables y pulidos creados con React y Tailwind CSS por Mauricio Tognoli.",
+    url: "https://mt-components.vercel.app",
+    siteName: "MT Components",
     images: [
       {
-        url: '/banner-mt-components.svg',
+        url: "https://mt-components.vercel.app/banner-mt-components.svg",
         width: 1200,
         height: 630,
-        alt: 'Mauricio Tognoli - Portafolio de componentes',
+        alt: "MT Components Banner",
       },
     ],
-    locale: 'es_ES',
-    type: 'website',
+    locale: "es_ES",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Mauricio Tognoli Components',
-    description: 'Portafolio de componentes y proyectos de Mauricio Tognoli.',
-    site: '@tognoli',
-    creator: '@tognoli',
-    images: ['/banner-mt-components.svg'],
+    card: "summary_large_image",
+    title: "MT Components | React + Tailwind UI Library",
+    description:
+      "Explora componentes React diseñados con detalle y consistencia. Creados por Mauricio Tognoli.",
+    images: ["https://mt-components.vercel.app/banner-mt-components.svg"],
+    creator: "@mauriciotognoli",
   },
-}
+  metadataBase: new URL("https://mt-components.vercel.app"),
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  colorScheme: 'dark light',
-}
+  themeColor: "#FF914D",
+  colorScheme: "light dark",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <body>
+    <html lang="es" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="bg-lightBackground text-lightText dark:bg-darkBackground dark:text-darkText transition-colors duration-300">
         <Providers>
           <Navbar />
-          {children}
+          <main className="min-h-screen">{children}</main>
           <Footer />
           <Analytics />
         </Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, MailIcon } from "lucide-react";
 import { siteContent } from "@/data/siteContent";
 import { useThemeLang } from "@/context/ThemeLangContext";
 
@@ -41,7 +41,7 @@ export default function AboutPage() {
               : "My experience includes personal and professional projects where I worked with React, Next.js, Tailwind CSS, and GraphQL, always learning new tools to enhance user experience."}
           </p>
 
-          <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4 mt-6">
+          <div className=" flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4 mt-6">
             <Link
               href="mailto:tognolimauricio@gmail.com"
               className="inline-flex items-center px-5 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/80 transition-all shadow-md"
@@ -75,7 +75,7 @@ export default function AboutPage() {
           {language === "es" ? "Habilidades" : "Skills"}
         </h2>
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-          {["React", "Next.js", "Tailwind CSS", "JavaScript", "TypeScript"].map(
+          {["React", "Next.js", "Tailwind CSS", "JavaScript", "TypeScript", "Figma", "UX/UI Design", "Responsive Design"].map(
             (skill) => (
               <span
                 key={skill}
@@ -89,18 +89,20 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 px-4 text-center">
-        <h3 className="text-3xl sm:text-4xl font-bold mb-6">
-          {language === "es"
-            ? "¿Quieres colaborar o hablar de un proyecto?"
-            : "Want to collaborate or discuss a project?"}
-        </h3>
-        <Link href="mailto:tognolimauricio@gmail.com">
-          <button className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold shadow-md hover:bg-primary/80 transition-all">
-            {language === "es" ? "Enviar mensaje" : "Send a Message"}
-          </button>
-        </Link>
-      </section>
+<section className="py-16 sm:py-20 px-4 text-center">
+  <h3 className="text-3xl sm:text-4xl font-bold mb-6">
+    {language === "es"
+      ? "¿Quieres colaborar o hablar de un proyecto?"
+      : "Want to collaborate or discuss a project?"}
+  </h3>
+  <Link href="mailto:tognolimauricio@gmail.com">
+    <button className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold shadow-md hover:bg-primary/80 transition-all flex items-center justify-center gap-2 mx-auto">
+      <MailIcon className="h-5 w-5" />
+      {language === "es" ? "Enviar mensaje" : "Send a Message"}
+    </button>
+  </Link>
+</section>
+
     </div>
   );
 }
