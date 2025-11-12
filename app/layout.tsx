@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "MT Components",
     images: [
       {
-        url: "https://mt-components.vercel.app/banner-mt-components.svg",
+        url: "/banner-mt-components.svg",
         width: 1200,
         height: 630,
         alt: "MT Components Banner",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "MT Components | React + Tailwind UI Library",
     description:
       "Explora componentes React diseñados con detalle y consistencia. Creados por Mauricio Tognoli.",
-    images: ["https://mt-components.vercel.app/banner-mt-components.svg"],
+    images: ["/banner-mt-components.svg"],
     creator: "@mauriciotognoli",
   },
   metadataBase: new URL("https://mt-components.vercel.app"),
